@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- <title>Document</title> -->
+    {%block title%} {%endblock%}
+    {%include 'components/head-link.html' %}
+    
+    {%block style%}{%endblock%}
+</head>
+<body>
+    {%include 'components/navbar.html' %}
+
+    {%block content%} {%endblock%}
+
+    {%include 'components/footer.html' %}
+    {%include 'components/scripts.html' %}
+
+
+    {%block script%} {%endblock%}
+</body>
+</html>

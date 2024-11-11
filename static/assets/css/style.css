@@ -1,0 +1,11 @@
+
+body {
+  font-family: "Inter", sans-serif  !important;
+}
+
+footer{
+  position: fixed;
+  width: 100%;
+  bottom:0;
+}
+

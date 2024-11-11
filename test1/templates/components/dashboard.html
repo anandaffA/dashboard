@@ -1,0 +1,144 @@
+
+
+{%block style%}
+<style>
+    .grid{margin:0 auto;}
+    .grid-item { 
+        width: 320px;
+        margin-bottom: 12px;
+        max-height: 600px;
+        display: block;
+        border: 0.33px solid rgba(0, 0, 0, 0.333);
+        border-radius: 3.33%;
+        overflow: hidden;
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+     }
+    h5{
+        font-size: medium;
+    }
+
+     /* Loading spinner */
+     .loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #333;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+</style>
+{%endblock%}
+
+<nav aria-label="Page navigation example ">
+    <ul class="pagination justify-content-center">
+      <li class="page-item ">
+        <a class="page-link disabled prev border-0">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link border-0" href="#">1</a></li>
+      <li class="page-item"><a class="page-link border-0" href="#">2</a></li>
+      <li class="page-item"><a class="page-link border-0" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link border-0 next" href="#">Next</a>
+      </li>
+    </ul>
+</nav>
+<div class="loading-spinner"></div>
+<div class="grid">
+
+</div>
+
+{%block script%}
+<!-- include -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+<script>
+
+let currentPage = 1;
+const spinner = $('.loading-spinner');
+const container = $('.grid'); 
+
+
+function fetchData(page){
+    $.ajax({
+    url: `https://picsum.photos/v2/list?page=${page}&limit=10`, // API endpoint
+    type: 'GET', // HTTP method (GET, POST, etc.)
+    dataType: 'json', 
+    success: function(data) {
+        console.log(data); 
+
+        if (data){
+            
+            $('.grid').empty();
+            data.forEach(item => {
+            const gridItem = $('<div>').addClass('grid-item shadow');
+            gridItem.html(`
+                <img src="${item.download_url}" alt="...">
+                <div class="p-1 px-2">
+                    <h5 class="mt-2">${item.author}</h5>
+                </div>
+            `);
+
+            // reinitialize masonry
+            container.append(gridItem); 
+            var $grid = $('.grid').masonry({
+                itemSelector: '.grid-item',
+                columnWidth: 80,
+                gutter:10,
+                fitWidth: true
+            });
+
+            $grid.imagesLoaded().progress( function() {
+                $grid.masonry('layout');
+                $grid.masonry('reloadItems');
+            });
+        });
+        }
+
+    },
+    error: function(error) {
+        console.error('Error fetching data:', error); // Handle the error response
+    },
+    complete: function() {
+        spinner.addClass('hidden'); // Hide loading spinner after request completes
+    }
+});
+}
+fetchData(currentPage);
+
+// Pagination button actions
+        $('.next').on('click', function() {
+            currentPage += 1;
+            console.log(currentPage);
+            fetchData(currentPage);
+        });
+
+        $('.prev').on('click', function() {
+            currentPage--;
+                fetchData(currentPage );
+        });
+</script>
+
+{%endblock%}
