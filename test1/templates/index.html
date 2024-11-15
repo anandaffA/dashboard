@@ -6,10 +6,65 @@
 <title>Main</title>
 {%endblock%}
 
+{%block style%}
+<style>
+    .hero{
+        background-image: url("{%static 'img/main.jpg'%}");
+        background-repeat: no-repeat;
+        height: 100vh;
+        max-width: 100%;
+        object-fit: contain;
+        background-position: 50% 0%;    
+        transition: 0s linear;
+        transition-property: background-position;
+        overflow: hidden;
+    }
+
+    .triangle-divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        
+    }
+</style>
+{%endblock%}
+
 {%block content%}
-<div class="container px-lg-4 py-4">
-    <h1 class="text-center">Masonry layout dashboard using masonryjs</h1>
-    <hr>
-    {%include 'components\dashboard.html' %}
+<div class="container-fluid hero">
+    <section class="row m-0 d-flex flex-column justify-content-center align-items-center px-5" style="height: 90vh;">
+            <h1 class="main-dark-2 display-1 text-start fw-bold">Unknown waters <br> await you now!</h1>
+            <p class="text-start fs-3 fw-light"> Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+    </section>
 </div>
+
+<div class="triangle-divider">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z" class="shape-fill"></path>
+    </svg>
+</div>
+
+<section class="p-0">
+    <div class="container">
+        <div class="row m-0 p-5">
+            <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                <h1 class="fw-bold main-light"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae tempore ducimus excepturi?</h1>
+            </div>
+            <div class="col-lg-6  d-flex justify-content-center align-items-center">
+                <img src="https://picsum.photos/500" alt="" style="width: 300px; height: 300px; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}
+
+{%block script%}
+<script>
+    $(window).scroll(function () {
+        $(".hero").css("background-position","50% " + (($(this).scrollTop() / 2) + "px"));
+    });
+</script>
 {%endblock%}

@@ -9,3 +9,18 @@ footer{
   bottom:0;
 }
 
+.main-green { 
+	color: #42b883 !important; 
+}
+	
+.main-orange { 
+	color: #ff7e67 !important; 
+}
+
+.main-dark2 { 
+	color: #347474 !important; 
+}
+
+.main-dark { 
+	color:  #35495e !important; 
+}
