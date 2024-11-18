@@ -1,5 +1,14 @@
 {%load static %}
-<nav class="navbar sticky-top navbar-expand-lg bg-light shadow">
+
+{%block style%}
+<style>
+  nav.navbar{
+   -webkit-transition: all 0.4s ease;
+   transition: all 0.4s ease;
+}
+</style>
+{%endblock%}
+<nav class="navbar w-100 fixed-top shadow-sm navbar-expand-lg">
     <div class="container-fluid">
       <!-- <a class="navbar-brand" href="#">Navbar</a> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,13 +17,13 @@
       <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav  mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{%url 'index'%}">Home</a>
+            <a class="nav-link active text-light" aria-current="page" href="{%url 'index'%}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{%url 'dashboard'%}">Dashboard</a>
+            <a class="nav-link text-light" href="{%url 'dashboard'%}">Dashboard</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-light" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
             <ul class="dropdown-menu">
@@ -25,7 +34,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link disabled text-light">Disabled</a>
           </li>
 
           <!-- <form class="d-flex" role="search">
@@ -39,3 +48,18 @@
       </div>
     </div>
   </nav>
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      $('nav').addClass('bg-dark');
+    } else {
+      $('nav').removeClass('bg-dark');
+    }
+  });
+</script>
+{%endblock%}

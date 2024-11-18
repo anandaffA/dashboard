@@ -24,3 +24,21 @@ footer{
 .main-dark { 
 	color:  #35495e !important; 
 }
+
+.text-gradient1{
+  background: -webkit-linear-gradient(#62c49a, #abfdd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient2{
+  background: -webkit-linear-gradient(#35495e, #347474);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient3{
+  background: -webkit-linear-gradient(#ff7961 , #ff9d8c  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
